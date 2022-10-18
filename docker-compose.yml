@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+
+  annotapi:
+    image: jnascimento/annotapi:latest
+    volumes: 
+      - "dataset-path":/home/dataset
+    ports:
+      - 30193:30193
+    restart: always
+    networks:
+      common_network:
+        aliases:
+          - annotapi
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - "site-content-volume":/usr/share/nginx/html
+    ports:
+      - 12494:80
+    restart: always
+    networks:
+      common_network:
+        aliases:
+          - web
+
+networks:
+  common_network:
