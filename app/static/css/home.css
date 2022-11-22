@@ -1,0 +1,61 @@
+/*
+ * This is the CSS stylesheet for the demo people application
+ */
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+
+body, .ui-btn {
+    font-family: Roboto;
+}
+
+.editor {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border: 2px solid darkgrey;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+button {
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+    background-color: #eee;
+}
+
+h1 {
+    text-align: center;
+}
+
+.image {
+    width: 60%;
+    margin: auto;
+    display: block;
+}
+
+.buttons{
+    display:flex;
+    /* items are centered along the line */
+    justify-content: center;
+    /* center: items are centered in the cross-axis */
+    align-items: center;
+    margin: auto;
+}
+
+.error {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    background-color: #fbb;
+    opacity: 0;
+}

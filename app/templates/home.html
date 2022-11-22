@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    {% block head %}
+    <head>
+        <title>Annotapp Web Page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+        <link rel="stylesheet" href="/static/css/home.css">
+    </head>
+    {% endblock %}
+
+    {% block body %}
+    <body>
+        <h1>Annotapp</h1>
+
+        <img id="imgid" class="image" src="" />
+        <div class="buttons">
+            <button type="button" id="undolast">Undo Last</button>
+            <button type="button" id="related">Related</button>
+            <button type="button" id="notrelated">Not Related</button>
+        </div>
+        <div class="error"></div>
+    </body>
+    {% endblock %}
+</html>
+
+{% block javascript %}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/home.js";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

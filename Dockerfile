@@ -1,4 +1,4 @@
-FROM python:3.11-rc-alpine AS base
+FROM python:3.10.8-alpine AS base
 
 RUN apk add vim git python3-dev openssh bash git g++ gcc
 
@@ -15,8 +15,9 @@ COPY app/ .
 
 EXPOSE 30193
 # Points to the current dir as our app factory for flask
-ENV FLASK_APP /home/app/src/app.py
+#ENV FLASK_APP /home/app/server.py
 # Add current dir to PYTHONPATH
 ENV PYTHONPATH "${PYTHONPATH}:/home/app"
 ENV PYTHONUNBUFFERED 1
-ENTRYPOINT pipenv run flask run --host=0.0.0.0 --port=30193
+
+ENTRYPOINT pipenv run python /home/app/build_database.py --no-reset && pipenv run python /home/app/server.py

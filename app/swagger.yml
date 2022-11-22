@@ -1,0 +1,146 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /database:
+    get:
+      operationId: image.read
+      tags:
+        - Database
+      summary: Read the database
+      description: Read the database
+      parameters:
+        - name: related
+          in: query
+          description: filter by the given label
+          type: boolean
+          required: False
+        - name: annotated
+          in: query
+          description: filter by whether the image was annotated
+          type: boolean
+          required: False
+        - name: qtde
+          in: query
+          description: qtde of returned images (-1 or None for all images)
+          type: integer
+          required: True
+          default: -1
+      responses:
+        200:
+          description: Successfully read image set operation
+          schema:
+            type: array
+            items:
+              properties:
+                imagepath:
+                  type: string
+                  description: image path
+                related:
+                  type: boolean
+                  description: whether image has been labelled as related to the event or not 
+                annotated:
+                  type: boolean
+                  description: whether images has already been annotated or not
+                timestamp:
+                  type: string
+                  description: timestamp of the last annotation
+    post:
+      operationId: build_database.build_database
+      tags:
+        - Database
+      summary: Create/Reset the database
+      description: Create/Reset the database
+      responses:
+        201:
+          description: Successfully created database
+          schema:
+            type: array
+            items:
+              properties:
+                imagepath:
+                  type: string
+                  description: image path
+                related:
+                  type: boolean
+                  description: whether image has been labelled as related to the event or not 
+                annotated:
+                  type: boolean
+                  description: whether images has already been annotated or not
+                timestamp:
+                  type: string
+                  description: timestamp of the last annotation
+
+  /image/{imagepath}:
+    put:
+      operationId: image.annotate
+      tags:
+        - Image
+      summary: Annotate an image
+      description: Annotate an image
+      parameters:
+        - name: imagepath
+          in: path
+          description: Image path
+          type: string
+          required: True
+        - name: image
+          in: body
+          schema:
+            type: object
+            properties:
+              related:
+                type: boolean
+                description: Whether the image is related to the event or not
+      responses:
+        200:
+          description: Successfully updated person
+          schema:
+            properties:
+              imagepath:
+                type: string
+                description: image path
+              related:
+                type: boolean
+                description: whether image has been labelled as related to the event or not 
+              annotated:
+                type: boolean
+                description: whether images has already been annotated or not
+              timestamp:
+                type: string
+                description: timestamp of the last annotation
+
+  /image/undo_last:
+    put:
+      operationId: image.undo_last
+      tags:
+        - Image
+      summary: Undo the last annotation
+      description: Undo the last annotation
+      responses:
+        200:
+          description: Successfully updated person
+          schema:
+            properties:
+              imagepath:
+                type: string
+                description: image path
+              related:
+                type: boolean
+                description: whether image has been labelled as related to the event or not 
+              annotated:
+                type: boolean
+                description: whether images has already been annotated or not
+              timestamp:
+                type: string
+                description: timestamp of the last annotation

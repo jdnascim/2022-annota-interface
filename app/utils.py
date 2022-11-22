@@ -13,12 +13,3 @@ def read_config():
         data = yaml.load(f, Loader=SafeLoader)
 
     return data
-
-def list_images():
-    config = read_config()
-
-    dataset_path = config["dataset_path"]
-
-    images = os.listdir(dataset_path)
-
-    return images[:10]
